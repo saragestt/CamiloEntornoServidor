@@ -84,11 +84,12 @@ foreach ($arr_3 as $key => $value){
     if ($key != "colores" && $key != "animales"){
          echo " La clave es: ". $key . " y el valor es: " . $value .  "<br>";
     }
-    else{
+    /*else{
         foreach($variable as $item){
             echo $item . "<br>";
         }
         echo "<br>";
-    }
+    }*/
    
 } 
+

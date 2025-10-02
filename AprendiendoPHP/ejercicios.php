@@ -144,5 +144,3 @@ pagar de los productos que estén en el carrito.*/
 //   }
 //  }
 
-
-
