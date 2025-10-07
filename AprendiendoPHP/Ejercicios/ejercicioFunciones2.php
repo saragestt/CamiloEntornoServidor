@@ -3,29 +3,29 @@
 
 /*
  *
- *  Funciones utilitarias (búsqueda y formato). Estas funciones deben de estar en el programa (código).
- *      - findStudentById(array $estudiantes, int $idUsuario): ?array -> Esta función debe retornar el objeto (array) del estudiante buscado (si existe).
- *        Si no existe, retornamos null.
+ * Funciones utilitarias (búsqueda y formato). Estas funciones deben de estar en el programa (código).
+ *    - findStudentById(array $estudiantes, int $idUsuario): ?array -> Esta función debe retornar el objeto (array) del estudiante buscado (si existe).
+ *      Si no existe, retornamos null.
  *
- *      - findCourseById(array $courses, int $idCurso): ?array -> Esta función debe retornar el objeto (array) del curso buscado (si existe). Si no existe,
- *        retornamos null.
+ *    - findCourseById(array $courses, int $idCurso): ?array -> Esta función debe retornar el objeto (array) del curso buscado (si existe). Si no existe,
+ *      retornamos null.
  *
- *      - fullName(string $first_name, string $last_name): string -> Este array retorna "Nombre Apellidos" como cadena de texto del usuario buscado en
- *        findStudentById (si no es null).
+ *    - fullName(string $first_name, string $last_name): string -> Este array retorna "Nombre Apellidos" como cadena de texto del usuario buscado en
+ *      findStudentById (si no es null).
  *
- *      - En HTML tenéis que representar el fullName() en un bloque/etiqueta <p></p>. Si no fue encontrado, mostrar en HTML una etiqueta <p>Usuario no
- *        encontrado</p>
+ *    - En HTML tenéis que representar el fullName() en un bloque/etiqueta <p></p>. Si no fue encontrado, mostrar en HTML una etiqueta <p>Usuario no
+ *      encontrado</p>
  *
- *      - Añadir una sección en HTMl (un div), donde aparecerán los correos (emails) de todos los estudiantes. Si no tiene correo, imprimir "
-          no-email@epsum.school Intentad usar ??
+ *    - Añadir una sección en HTMl (un div), donde aparecerán los correos (emails) de todos los estudiantes. Si no tiene correo, imprimir "
+        no-email@epsum.school Intentad usar ??
  *
- *       Si queréis añadir más funciones para resolver esto, podéis hacerlo.
+ *     Si queréis añadir más funciones para resolver esto, podéis hacerlo.
  *
- *     Otras funciones
- *      - getStudentGrado(array $grados, int $studentId): void -> Debe imprimir todas las notas del alumno.
- *      - statusFromGrado(float ...values): string -> Retorna "Suspenso" si media < 5, "Aprobado" si media >=5 y < 7, "Notable" si >= 7 y < 9, y "Sobresaliente si >= 9.
- *          - Para sacar la media es suma de todas las notas entre asignaturas totales matriculadas por el estudiante.
- *          - Mostrar en el HTML "suspenso", "aprobado", .... y el nombre del estudiante.
+ *   Otras funciones
+ *    - getStudentGrado(array $grados, int $studentId): void -> Debe imprimir todas las notas del alumno.
+ *    - statusFromGrado(float ...values): string -> Retorna "Suspenso" si media < 5, "Aprobado" si media >=5 y < 7, "Notable" si >= 7 y < 9, y "Sobresaliente si >= 9.
+ *    - Para sacar la media es suma de todas las notas entre asignaturas totales matriculadas por el estudiante.
+ *    - Mostrar en el HTML "suspenso", "aprobado", .... y el nombre del estudiante.
  * */
 
 $estudiantes = [
@@ -65,56 +65,63 @@ function findStudentById(array $estudiantes, int $idUsuario): ?array {
     $estudiante = null;
 
     while(!$encotrado && $cont < count($estudiantes)) {
-        if ($estudiantes[$cont]["id"] == $idUsuario) {
+        if ($estudiantes[$cont]["id"] === $idUsuario) {
             $estudiante = $estudiantes[$cont];
             $encotrado = true;
         }
         $cont++;
+
     }
     return $estudiante;
 }
 
-echo json_encode(findStudentById($estudiantes, 1));
+echo json_encode(findStudentById($estudiantes, 2));
 
+echo "<br>";
+function findCourseById(array $courses, int $idCurso): ?array {
+    $encontrado = false;
+    $cont = 0;
+    $course = null;
+    while(!$encontrado && $cont < count($courses)) {
+        if ($courses[$cont]["id"] === $idCurso) {
+            $course = $courses[$cont];
+            $encontrado = true;
+
+        }
+        $cont++;
+    }
+    return $course;
+
+}
+echo "<br>";
+echo json_encode(findCourseById($courses, 103));
+
+echo "<br>";
 function fullName(string $firstName, string $lastName): string{
     return  $firstName . " " . $lastName;
 }
 
-$estudiante = findStudentById($estudiantes, 1); //null o array
+$estudiante = findStudentById($estudiantes, 1);//null o array
+
 if ($estudiante === null) {
+
     $nombre = "<p> Usuario no encontrado</p>";
 } else {
     $n = fullName($estudiante["first_name"], $estudiante["last_name"]);
-    $nombre = "<p> . $n . </p>";
+    $nombre1 = "<p> . $n . </p>";
 }
+
+echo "<br>";
+
+
+function getStudentGrado(array $grados, int $studentId): void {
+
+}
+
+getStudentGrado($grados);
 ?>
 
 <!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ejercicio estudiantes y grado</title>
-
-    <style>
-#container {
-width: 95%;
-            max-width: 500px;
-            margin: 20px auto 40px;
-        }
-    </style>
-</head>
-<body>
-    <div id="container">
-
-
-    </div>
-</body>
-</html>
-
-13:30
-
-Camilo dice:<!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
